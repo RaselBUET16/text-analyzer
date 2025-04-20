@@ -11,7 +11,7 @@ class TextController {
      */
     static async createText(req, res) {
         try {
-            const { content } = req.body;
+            const content = req.body?.content;
             if (!content) {
                 return res.status(400).json({
                     success: false,
@@ -123,7 +123,7 @@ class TextController {
             res.json({
                 success: true,
                 message: "Successfully updated the text",
-                updatedTextObj: {id: updatedTextObj._id, content: updatedTextObj.content}
+                textObj: {id: updatedTextObj._id, content: updatedTextObj.content}
             })
         } catch (error) {
             printError(error);
@@ -215,7 +215,7 @@ class TextController {
             res.json({
                 success: true,
                 message: "Text found",
-                wordCount: textObj.analysis.charCount
+                charCount: textObj.analysis.charCount
             })
         } catch (error) {
             printError(error);
@@ -246,7 +246,7 @@ class TextController {
             res.json({
                 success: true,
                 message: "Text found",
-                wordCount: textObj.analysis.sentenceCount
+                sentenceCount: textObj.analysis.sentenceCount
             })
         } catch (error) {
             printError(error);
@@ -277,7 +277,7 @@ class TextController {
             res.json({
                 success: true,
                 message: "Text found",
-                wordCount: textObj.analysis.paragraphCount
+                paragraphCount: textObj.analysis.paragraphCount
             })
         } catch (error) {
             printError(error);
@@ -308,7 +308,7 @@ class TextController {
             res.json({
                 success: true,
                 message: "Text found",
-                wordCount: textObj.analysis.longestWords
+                longestWords: textObj.analysis.longestWords
             })
         } catch (error) {
             printError(error);
