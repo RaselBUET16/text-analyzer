@@ -99,6 +99,18 @@ describe('TextController', () => {
         
             expect(res.body.textObj.content).toBe(sampleText);
         });
+
+        it('should respond with 404', async () => {
+            await request(app)
+                .get('/texts/6804cbd153339f1705d83cab')
+                .expect(404)
+        });
+
+        it('should respond with 500', async () => {
+            await request(app)
+                .get('/texts/12343')
+                .expect(500)
+        });
     });
 
     describe('PUT /texts/:id', () => {
@@ -121,6 +133,20 @@ describe('TextController', () => {
                 .expect(200);
         
             expect(res.body.textObj.content).toBe(sample2);
+            
+        });
+
+        it('should respond with 400', async () => {
+            await request(app)
+                .put(`/texts/6804cbd153339f1705d83cab`)
+                .expect(400)
+        });
+
+        it('should respond with 404', async () => {
+            await request(app)
+                .put('/texts/6804cbd153339f1705d83cab')
+                .send({ content: "sample2" })
+                .expect(404)
         });
     });
 
@@ -137,12 +163,18 @@ describe('TextController', () => {
                 }
             });
             
-            const res = await request(app)
+            await request(app)
                 .delete(`/texts/${created._id}`)
                 .expect(200);
             
             const allTexts = await TextModel.find();
             expect(allTexts.length).toBe(0);
+        });
+
+        it('should respond with 404', async () => {
+            await request(app)
+                .delete('/texts/6804cbd153339f1705d83cab')
+                .expect(404)
         });
     });
 
@@ -170,6 +202,10 @@ describe('TextController', () => {
                 .expect(200);
           
             expect(res.body.count).toBe(16);
+
+            await request(app)
+                .get('/texts/6804cbd153339f1705d83cab/word-count')
+                .expect(404)
         });
     
         it('GET /texts/:id/char-count should return character count', async () => {
@@ -178,6 +214,10 @@ describe('TextController', () => {
                 .expect(200);
             
             expect(res.body.count).toBe(60);
+
+            await request(app)
+                .get('/texts/6804cbd153339f1705d83cab/char-count')
+                .expect(404)
         });
     
         it('GET /texts/:id/sentence-count should return sentence count', async () => {
@@ -186,6 +226,10 @@ describe('TextController', () => {
                 .expect(200);
             
             expect(res.body.count).toBe(2);
+
+            await request(app)
+                .get('/texts/6804cbd153339f1705d83cab/sentence-count')
+                .expect(404)
         });
     
         it('GET /texts/:id/paragraph-count should return paragraph count', async () => {
@@ -194,6 +238,10 @@ describe('TextController', () => {
                 .expect(200);
             
             expect(res.body.count).toBe(2);
+
+            await request(app)
+                .get('/texts/6804cbd153339f1705d83cab/paragraph-count')
+                .expect(404)
         });
     
         it('GET /texts/:id/longest-words should return longest words', async () => {
@@ -202,6 +250,10 @@ describe('TextController', () => {
                 .expect(200);
             
             expect(res.body['longest-words']).toEqual([["quick", "brown", "jumps"], ["slept"]] );
+
+            await request(app)
+                .get('/texts/6804cbd153339f1705d83cab/longest-words')
+                .expect(404)
         });
     });
     

@@ -7,3 +7,6 @@ logs/
 
 # Environment files
 .env
+
+# test coverage files
+coverage/
