@@ -1,4 +1,5 @@
 const winston = require('winston');
+const path = require('path')
 
 const Logger = winston.createLogger({
     level: 'debug',
@@ -16,7 +17,7 @@ const Logger = winston.createLogger({
     ),
     transports: [
         new winston.transports.Console({ level: process.env.LOG_LEVEL || 'debug' }),
-        new winston.transports.File({ level: 'debug', filename: `${process.env.LOG_DIR}/console.log` })
+        new winston.transports.File({ level: 'debug', filename: path.join(process.env.LOG_DIR, 'console.log')})
     ],
     exitOnError: false
 })
