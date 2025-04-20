@@ -1,14 +1,20 @@
-import './App.css'
-
+import React from 'react';
+import { Route, BrowserRouter as Router, Routes} from 'react-router-dom'
+import Navbar from './components/Navbar';
+import Landing from './components/Landing';
+import { Toaster } from 'react-hot-toast';
 function App() {
 
   return (
-    <>
-      <div className="container mt-5">
-        <h1 className="text-primary">Hello Bootstrap!</h1>
-        <button className="btn btn-success">Click Me</button>
+    <Router>
+      <div className="container">
+        <Toaster position='bottom-right' />
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Landing />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   )
 }
 
