@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: text-analyzer-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+    volumes:
+      - /home/Rasel/db-assesment:/data/db
+    networks:
+      - analyzer-network
+
+  backend:
+    image: text-analyzer-backend:latest
+    container_name: text-analyzer-backend
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - MONGODB_URI=${MONGODB_URI}
+      - LOG_DIR=/app/logs
+      - LOG_LEVEL=${LOG_LEVEL}
+    volumes:
+      - ${LOG_DIR}:/app/logs
+    depends_on:
+      - mongo
+    networks:
+      - analyzer-network
+
+  frontend:
+    image: text-analyzer-frontend:latest
+    container_name: text-analyzer-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - analyzer-network
+      
+networks:
+  analyzer-network:
+    driver: bridge

@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "superUser"
+      MONGO_INITDB_ROOT_PASSWORD: "1234"
+      MONGO_INITDB_DATABASE: "admin"
+    volumes:
+      - /home/Rasel/db-assesment:/data/db
+    networks:
+      - abc
+
+networks:
+  abc:
+    driver: bridge
+  
+

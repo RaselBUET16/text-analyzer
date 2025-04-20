@@ -19,13 +19,14 @@ The backend API server is written using Node/Express and MongoDB.
     PORT=5000
 
     # Database
-    MONGODB_URI=MONGODB_URI=mongodb://superUser:1234@mongo:27017/admin
+    MONGODB_URI=mongodb://superUser:1234@mongo:27017/admin
 
     # Log
-    LOG_DIR='/app/logs/console.log'
+    LOG_DIR='/home/User/log_dir'
     LOG_LEVEL='log level' # Ex. 'debug'
 
     ```
+- For database, provide your MONGODB_URI, or using the /backend/docker-compose.yml, start mongo container. (Update data directory in compose file under `volumes` before starting the container)
 - Run `npm run dev` to start development server.
 - For running test suits: Run `npm test`
 - For getting test coverage report: Run `npm run test:coverage`
