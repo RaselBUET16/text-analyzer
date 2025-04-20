@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const { printDebug, printError, printWarning, printInfo } = require('./utils/logger.js');
+const textRoutes = require('./routes/textRoutes.js');
 
 const app = express();
 
@@ -40,6 +41,16 @@ app.get('/health', (req, res) => {
         message: "Service is running",
         uptime: process.uptime(),
         database: mongoose.connection.readyState === 1 ? 'Connected' : "Disconnected"
+    })
+})
+
+app.use('/texts', textRoutes);
+
+// HTTP 404
+app.use('*all', (req, res, next) => {
+    res.status(404).json({
+        success: false,
+        message: 'Requested route not found'
     })
 })
 

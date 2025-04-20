@@ -1,0 +1,24 @@
+const mongoose = require('mongoose');
+
+const TextSchema = new mongoose.Schema({
+    content: {type: String, required: true},
+    analysis: {
+        type: {
+            wordCount: Number,
+            charCount: Number,
+            sentenceCount: Number,
+            paragraphCount: Number,
+            longestWords: [[String]]
+        },
+        require: true
+    },
+    
+}, {timestamps: true});
+
+const TextModel = mongoose.model(
+    process.env.TextCollection || "Text",
+    TextSchema,
+    process.env.TextCollection || "Text"
+)
+
+module.exports = TextModel;
