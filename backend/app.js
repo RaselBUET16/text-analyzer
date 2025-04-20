@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const cors = require('cors');
+
 const { printDebug, printError, printWarning, printInfo } = require('./utils/logger.js');
 const textRoutes = require('./routes/textRoutes.js');
 
@@ -23,7 +25,8 @@ app.use(
 
 // Application Configuration
 app.use(express.json());
-app.use(express.urlencoded({ extended: false} ))
+app.use(express.urlencoded({ extended: false} ));
+app.use(cors()); 
 
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
