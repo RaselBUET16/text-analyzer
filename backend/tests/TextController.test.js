@@ -169,7 +169,7 @@ describe('TextController', () => {
                 .get(`/texts/${textId}/word-count`)
                 .expect(200);
           
-            expect(res.body.wordCount).toBe(16);
+            expect(res.body.count).toBe(16);
         });
     
         it('GET /texts/:id/char-count should return character count', async () => {
@@ -177,7 +177,7 @@ describe('TextController', () => {
                 .get(`/texts/${textId}/char-count`)
                 .expect(200);
             
-            expect(res.body.charCount).toBe(60);
+            expect(res.body.count).toBe(60);
         });
     
         it('GET /texts/:id/sentence-count should return sentence count', async () => {
@@ -185,7 +185,7 @@ describe('TextController', () => {
                 .get(`/texts/${textId}/sentence-count`)
                 .expect(200);
             
-            expect(res.body.sentenceCount).toBe(2);
+            expect(res.body.count).toBe(2);
         });
     
         it('GET /texts/:id/paragraph-count should return paragraph count', async () => {
@@ -193,7 +193,7 @@ describe('TextController', () => {
                 .get(`/texts/${textId}/paragraph-count`)
                 .expect(200);
             
-            expect(res.body.paragraphCount).toBe(2);
+            expect(res.body.count).toBe(2);
         });
     
         it('GET /texts/:id/longest-words should return longest words', async () => {
@@ -201,7 +201,7 @@ describe('TextController', () => {
                 .get(`/texts/${textId}/longest-words`)
                 .expect(200);
             
-            expect(res.body.longestWords).toEqual([["quick", "brown", "jumps"], ["slept"]] );
+            expect(res.body['longest-words']).toEqual([["quick", "brown", "jumps"], ["slept"]] );
         });
     });
     

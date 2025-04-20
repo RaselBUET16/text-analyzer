@@ -184,7 +184,7 @@ class TextController {
             res.json({
                 success: true,
                 message: "Text found",
-                wordCount: textObj.analysis.wordCount
+                count: textObj.analysis.wordCount
             })
         } catch (error) {
             printError(error);
@@ -215,7 +215,7 @@ class TextController {
             res.json({
                 success: true,
                 message: "Text found",
-                charCount: textObj.analysis.charCount
+                count: textObj.analysis.charCount
             })
         } catch (error) {
             printError(error);
@@ -246,7 +246,7 @@ class TextController {
             res.json({
                 success: true,
                 message: "Text found",
-                sentenceCount: textObj.analysis.sentenceCount
+                count: textObj.analysis.sentenceCount
             })
         } catch (error) {
             printError(error);
@@ -277,7 +277,7 @@ class TextController {
             res.json({
                 success: true,
                 message: "Text found",
-                paragraphCount: textObj.analysis.paragraphCount
+                count: textObj.analysis.paragraphCount
             })
         } catch (error) {
             printError(error);
@@ -308,7 +308,7 @@ class TextController {
             res.json({
                 success: true,
                 message: "Text found",
-                longestWords: textObj.analysis.longestWords
+                'longest-words': textObj.analysis.longestWords
             })
         } catch (error) {
             printError(error);
