@@ -16,7 +16,7 @@ const Logger = winston.createLogger({
     ),
     transports: [
         new winston.transports.Console({ level: process.env.LOG_LEVEL || 'debug' }),
-        new winston.transports.File({ level: 'debug', filename: process.env.LOG_FILE_PATH })
+        new winston.transports.File({ level: 'debug', filename: `${process.env.LOG_DIR}/console.log` })
     ],
     exitOnError: false
 })
