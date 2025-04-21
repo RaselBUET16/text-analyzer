@@ -14,8 +14,7 @@ const TextSchema = new mongoose.Schema({
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: process.env.UserCollection || 'User',
-        required: true
+        ref: process.env.UserCollection || 'User'
     }
 }, {timestamps: true});
 

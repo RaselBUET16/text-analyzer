@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 const API_URL = import.meta.env.VITE_API_URL
 
-function createAbsoluteUrl (base, path) {
+export function createAbsoluteUrl (base, path) {
   if (String(base).endsWith('/')) {
     base = base.slice(0, -1)
   }
@@ -15,7 +15,8 @@ function createAbsoluteUrl (base, path) {
 
 export function sendGETRequest (url, timeout=5000) {
   const headers = {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
   }
   url = createAbsoluteUrl(API_URL, url)
   return axios.get(url, { headers, timeout })
@@ -23,7 +24,8 @@ export function sendGETRequest (url, timeout=5000) {
 
 export function sendPOSTRequest (url, body, timeout=5000) {
   const headers = {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
   }
   url = createAbsoluteUrl(API_URL, url)
   return axios.post(url, body, { headers, timeout })
@@ -31,7 +33,8 @@ export function sendPOSTRequest (url, body, timeout=5000) {
 
 export function sendPUTRequest (url, body) {
   const headers = {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
   }
   url = createAbsoluteUrl(API_URL, url)
   return axios.put(url, body, { headers })
@@ -39,7 +42,8 @@ export function sendPUTRequest (url, body) {
 
 export function sendDELETERequest (url) {
   const headers = {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
   }
   url = createAbsoluteUrl(API_URL, url)
   return axios.delete(url, { headers })

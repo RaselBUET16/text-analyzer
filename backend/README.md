@@ -19,10 +19,10 @@ The backend API server is written using Node/Express and MongoDB.
     PORT=5000
 
     # Database
-    MONGODB_URI=mongodb://superUser:1234@mongo:27017/admin
+    MONGODB_URI=mongodb://superUser:1234@localhost:27017/admin
 
     # Log
-    LOG_DIR='/home/User/log_dir'
+    LOG_DIR='/tmp/log_dir'
     LOG_LEVEL='log level' # Ex. 'debug'
 
     # Google OAuth Creds
