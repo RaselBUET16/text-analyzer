@@ -25,6 +25,10 @@ services:
       - MONGODB_URI=${MONGODB_URI}
       - LOG_DIR=/app/logs
       - LOG_LEVEL=${LOG_LEVEL}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - CLIENT_URL=${CLIENT_URL}
+      - JWT_SECRET=${JWT_SECRET}
     volumes:
       - ${LOG_DIR}:/app/logs
     depends_on:

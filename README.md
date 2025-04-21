@@ -27,6 +27,15 @@ MONGODB_URI=MONGODB_URI=mongodb://superUser:1234@mongo:27017/admin
 # Log
 LOG_DIR='/home/user/logs/'
 LOG_LEVEL='debug'
+# Google OAuth Creds
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+# Client
+CLIENT_URL=http://localhost:3000
+
+# Secrets
+JWT_SECRET=
 
 ```
 - Start frontend, backend, db containers using master docker-compose.yml
