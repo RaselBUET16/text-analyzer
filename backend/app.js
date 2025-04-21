@@ -3,9 +3,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
+const passport = require('passport');
 
 const { printDebug, printError, printWarning, printInfo } = require('./utils/logger.js');
 const textRoutes = require('./routes/textRoutes.js');
+const authRoutes = require('./routes/authRoutes.js');
 
 const app = express();
 
@@ -28,6 +30,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false} ));
 app.use(cors()); 
 
+// Passport
+app.use(passport.initialize());
+require('./config/auth.js');
+
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
   .then(()=> {
@@ -49,6 +55,7 @@ app.get('/health', (req, res) => {
 })
 
 app.use('/texts', textRoutes);
+app.use('/auth', authRoutes);
 
 // HTTP 404
 app.use('*all', (req, res, next) => {

@@ -25,6 +25,16 @@ The backend API server is written using Node/Express and MongoDB.
     LOG_DIR='/home/User/log_dir'
     LOG_LEVEL='log level' # Ex. 'debug'
 
+    # Google OAuth Creds
+    GOOGLE_CLIENT_ID=
+    GOOGLE_CLIENT_SECRET=
+
+    # Client
+    CLIENT_URL=http://localhost:5173
+
+    # Secrets
+    JWT_SECRET=
+
     ```
 - For database, provide your MONGODB_URI, or using the /backend/docker-compose.yml, start mongo container. (Update data directory in compose file under `volumes` before starting the container)
 - Run `npm run dev` to start development server.

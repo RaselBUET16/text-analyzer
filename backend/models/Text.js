@@ -12,7 +12,11 @@ const TextSchema = new mongoose.Schema({
         },
         require: true
     },
-    
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: process.env.UserCollection || 'User',
+        required: true
+    }
 }, {timestamps: true});
 
 const TextModel = mongoose.model(
