@@ -53,7 +53,7 @@ const Text = ({ text, onDelete, onUpdate }) => {
             handleHTTPSuccess(res);
             setAnalysis({
                 ...analysis,
-                [type]: res.data.count
+                [type]: res.data.count || res.data['longest-words']
             })
         }).catch(error => {
             handleHTTPError(error)
@@ -148,7 +148,7 @@ const Text = ({ text, onDelete, onUpdate }) => {
         )}
 
         {showStats['longest-words'] && (
-            <div className="mt-2">Longest Words: {analysis["longest-words"]}</div>
+            <div className="mt-2">Longest Words: {analysis["longest-words"]?.toString()}</div>
         )}
     </div>
   );

@@ -1,4 +1,7 @@
 function createAbsoluteUrl (base, path) {
+    if (!base || !path) {
+        return '';
+    }
     if (String(base).endsWith('/')) {
       base = base.slice(0, -1)
     }

@@ -50,7 +50,9 @@ export function sendDELETERequest (url) {
 }
 
 export function handleHTTPSuccess (res) {
-  toast.success(res.data.message || "Success!");
+  if (res?.data?.message) {
+    toast.success(res.data.message);
+  }
 }
 
 export function handleHTTPError (error) {
@@ -59,7 +61,15 @@ export function handleHTTPError (error) {
     case 400:
       title = 'HTTP 400. Bad Request'
       break
+    
+    case 401:
+      title = 'HTTP 401. Unauthorized User'
+      break
 
+    case 403:
+      title = 'HTTP 403. Forbidden'
+      break
+      
     case 404:
       title = 'HTTP 404. Not Found'
       break

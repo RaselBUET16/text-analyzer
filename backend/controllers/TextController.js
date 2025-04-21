@@ -20,7 +20,7 @@ class TextController {
             }
 
             const analysis = TextAnalyzerService.analyzeText(content);
-            const newText = await TextModel.create({ content, analysis });
+            const newText = await TextModel.create({ content, analysis, user: req.user._id });
             res.status(201).json({
                 success: true,
                 message: "Successfully created new text entry",
@@ -96,7 +96,14 @@ class TextController {
      */
     static async updateText(req, res) {
         try {
-            const { id } = req.params;
+            const textObj = req.textObj;
+            if (!textObj) {
+                return res.status(403).json({
+                    success: false,
+                    message: 'Forbidden'
+                })
+            }
+
             const content = req.body?.content;
 
             if (!content) {
@@ -108,7 +115,7 @@ class TextController {
 
             const analysis = TextAnalyzerService.analyzeText(content);
             const updatedTextObj = await TextModel.findByIdAndUpdate(
-                id,
+                textObj._id,
                 { content, analysis },
                 { new: true }
             )
@@ -142,8 +149,15 @@ class TextController {
      */
     static async deleteText(req, res) {
         try {
-            const { id } = req.params;
-            const deletedTextObj = await TextModel.findByIdAndDelete(id);
+            const textObj = req.textObj;
+            if (!textObj) {
+                return res.status(403).json({
+                    success: false,
+                    message: 'Forbidden'
+                })
+            }
+
+            const deletedTextObj = await TextModel.findByIdAndDelete(textObj.id);
 
             if (!deletedTextObj) {
                 return res.status(404).json({
@@ -157,6 +171,7 @@ class TextController {
                 message: "Successfully deleted the text"
             })
         } catch (error) {
+            printError(error);
             res.status(500).json({
                 success: false,
                 message: "Internal Server Error"
@@ -172,12 +187,11 @@ class TextController {
      */
     static async getWordCount(req, res) {
         try {
-            const { id } = req.params;
-            const textObj = await TextModel.findById(id);
+            const textObj = req.textObj;
             if (!textObj) {
-                return res.status(404).json({
+                return res.status(403).json({
                     success: false,
-                    message: "Requested text not found"
+                    message: 'Forbidden'
                 })
             }
 
@@ -203,12 +217,11 @@ class TextController {
      */
     static async getCharCount(req, res) {
         try {
-            const { id } = req.params;
-            const textObj = await TextModel.findById(id);
+            const textObj = req.textObj;
             if (!textObj) {
-                return res.status(404).json({
+                return res.status(403).json({
                     success: false,
-                    message: "Requested text not found"
+                    message: 'Forbidden'
                 })
             }
 
@@ -234,12 +247,11 @@ class TextController {
      */
     static async getSentenceCount(req, res) {
         try {
-            const { id } = req.params;
-            const textObj = await TextModel.findById(id);
+            const textObj = req.textObj;
             if (!textObj) {
-                return res.status(404).json({
+                return res.status(403).json({
                     success: false,
-                    message: "Requested text not found"
+                    message: 'Forbidden'
                 })
             }
 
@@ -265,12 +277,11 @@ class TextController {
      */
     static async getParagraphCount(req, res) {
         try {
-            const { id } = req.params;
-            const textObj = await TextModel.findById(id);
+            const textObj = req.textObj;
             if (!textObj) {
-                return res.status(404).json({
+                return res.status(403).json({
                     success: false,
-                    message: "Requested text not found"
+                    message: 'Forbidden'
                 })
             }
 
@@ -296,12 +307,11 @@ class TextController {
      */
     static async getLongestWords(req, res) {
         try {
-            const { id } = req.params;
-            const textObj = await TextModel.findById(id);
+            const textObj = req.textObj;
             if (!textObj) {
-                return res.status(404).json({
+                return res.status(403).json({
                     success: false,
-                    message: "Requested text not found"
+                    message: 'Forbidden'
                 })
             }
 
